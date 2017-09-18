@@ -20,7 +20,7 @@ public class ResponseBuilder {
     }
     public static Reviews reviewResponse() {
         Reviews reviews = new Reviews();
-        List<Review> reviewList = new ArrayList<>();
+        List<Review> reviewList = new ArrayList<Review>();
         reviews.setId(121);
         reviews.setAverageScore(4.5);
         Review review = new Review();
