@@ -1,10 +1,9 @@
 package com.platform.marketplaces.util;
-import com.amazonaws.services.lambda.runtime.Context;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.platform.marketplaces.models.Product;
 import com.platform.marketplaces.models.Review;
-import com.platform.marketplaces.models.Reviews;
 
 import java.io.IOException;
 
@@ -23,7 +22,7 @@ public class PojoConvertor {
         }
         return "";
     }
-    public static String reviewsConvertor(Reviews reviews) {
+    public static String reviewsConvertor(Product reviews) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             String jsonInStrings = mapper.writeValueAsString(reviews) ;

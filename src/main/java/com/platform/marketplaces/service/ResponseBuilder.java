@@ -1,42 +1,29 @@
 package com.platform.marketplaces.service;
+import com.platform.marketplaces.models.Product;
 import com.platform.marketplaces.models.Response;
 import com.platform.marketplaces.models.Review;
-import com.platform.marketplaces.models.Reviews;
 import com.platform.marketplaces.util.PojoConvertor;
 
 import java.util.UUID;
 
 public class ResponseBuilder {
-
-    public static Response statusOkayResponse(Response response, Review review) {
-        response.setCorrelation(UUID.randomUUID().toString());
-        response.setResponse("POST request successful");
-        response.setBody(PojoConvertor.reviewConvertor(review));
-        return response;
+    public static Product statusOkayResponse(Review review) {
+        return MockResponseBuilder.submitReview(review);
     }
 
-    public static Response statusReviewsResponse(String reviewId, Response response) {
-        Reviews reviews = MockResponseBuilder.reviewsResponse();
-        UUID id = UUID.randomUUID();
-        response.setCorrelation(id.toString());
-        response.setResponse("GET request successful");
-        response.setBody(PojoConvertor.reviewsConvertor(reviews));
-        return response;
+    public static Product statusReviewsResponse(String productId) {
+        return MockResponseBuilder.reviewsResponse(productId);
     }
 
-    public static Response statusReviewResponse(String productId, Response response) {
-        Review review = MockResponseBuilder.reviewResponse();
-        UUID id = UUID.randomUUID();
-        response.setCorrelation(id.toString());
-        response.setResponse("GET request successful");
-        response.setBody(PojoConvertor.reviewConvertor(review));
-        return response;
+    public static Product statusReviewResponse(String productId, String reviewId) {
+        return MockResponseBuilder.reviewResponse(productId, reviewId);
+
     }
 
-    public static Response statusInvalidResponse(Response response) {
-        response.setResponse("Invalid Input");
-        response.setBody("Invalid Input/Unsupported HTTP Method");
-        response.setCorrelation(UUID.randomUUID().toString());
-        return response;
+    public static Product statusInvalidResponse() {
+        Product product = new Product();
+        product.setProductId(0);
+        product.setAverageScore(0);
+        return product;
     }
 }

@@ -1,31 +1,42 @@
 package com.platform.marketplaces.service;
 
+import com.platform.marketplaces.models.Product;
 import com.platform.marketplaces.models.Response;
 import com.platform.marketplaces.models.Review;
-import com.platform.marketplaces.models.Reviews;
 import com.platform.marketplaces.util.PojoConvertor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class MockResponseBuilder {
-    public static Reviews reviewsResponse() {
-        Reviews reviews = new Reviews();
+
+    public static Product submitReview(Review review) {
+        Product product = new Product();
+        product.setProductId(Integer.parseInt(review.getProductId()));
         List<Review> reviewList = new ArrayList<Review>();
-        reviews.setProductId(17);
+        Review rvw = new Review();
+        rvw.setComment(review.getComment());
+        rvw.setScore(review.getScore());
+        rvw.setReviewId("30");
+        reviewList.add(rvw);
+        product.setReview(reviewList);
+        return product;
+    }
+
+    public static Product reviewsResponse(String productId) {
+        Product reviews = new Product();
+        List<Review> reviewList = new ArrayList<Review>();
+        reviews.setProductId(Integer.parseInt(productId));
         reviews.setAverageScore(4.5);
 
         Review review = new Review();
         review.setComment("good");
         review.setScore(3);
-        review.setProductId("17");
         review.setReviewId("30");
 
         Review review1 = new Review();
         review1.setComment("great");
         review1.setScore(5);
-        review.setProductId("17");
         review.setReviewId("31");
 
         reviewList.add(review);
@@ -34,12 +45,17 @@ public class MockResponseBuilder {
         return reviews;
     }
 
-    public static Review reviewResponse() {
+    public static Product reviewResponse(String productId, String reviewId) {
+        Product reviews = new Product();
+        List<Review> reviewList = new ArrayList<Review>();
+        reviews.setProductId(Integer.parseInt(productId));
+
         Review review = new Review();
         review.setComment("Not a good product");
         review.setScore(1);
-        review.setProductId("12");
-        review.setReviewId("23");
-        return review;
+        review.setReviewId(reviewId);
+        reviewList.add(review);
+
+        return reviews;
     }
 }

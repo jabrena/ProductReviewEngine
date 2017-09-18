@@ -1,31 +1,28 @@
 package com.platform.marketplaces;
 
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.platform.marketplaces.models.Product;
 import com.platform.marketplaces.models.Response;
 import com.platform.marketplaces.models.Review;
-import com.platform.marketplaces.models.Reviews;
 import com.platform.marketplaces.service.ResponseBuilder;
-
-import java.util.UUID;
 
 public class ReviewEngineHandler {
 
-    // GET Reviews/{ReviewId}
-    public Response getReviewByReviewId(String reviewId, Response response) {
-        return ResponseBuilder.statusReviewsResponse(reviewId, response);
+    // GET Product/{ReviewId}
+    public Product getReviewByReviewId(String productId, String reviewId) {
+        return ResponseBuilder.statusReviewResponse(productId, reviewId);
     }
     // GET Product/{ProductId}
-    public Response getReviewsByProductId(String productId, Response response) {
-        return ResponseBuilder.statusReviewsResponse(productId, response);
+    public Product getReviewsByProductId(String productId) {
+        return ResponseBuilder.statusReviewsResponse(productId);
     }
 
     // POST Product/{ProductId}
-    public Response setReviewForProduct(Review review, Response response) {
-        return ResponseBuilder.statusOkayResponse(response, review);
+    public Product setReviewForProduct(Review review) {
+        return ResponseBuilder.statusOkayResponse(review);
     }
 
     // PUT/PATCH/DELETE Product/{ProductId}
-    public Response constructInvalidResponse(Response response) {
-        return ResponseBuilder.statusInvalidResponse(response);
+    public Product constructInvalidResponse() {
+        return ResponseBuilder.statusInvalidResponse();
     }
 }

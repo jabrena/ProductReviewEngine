@@ -2,7 +2,7 @@ package com.platform.marketplaces.models;
 
 import java.util.List;
 
-public class Reviews {
+public class Product {
     private int productId;
     private double averageScore;
     private List<Review> review;
