@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platform.marketplaces.models.Review;
+import com.platform.marketplaces.models.Reviews;
 
 import java.io.IOException;
 
@@ -22,10 +23,10 @@ public class PojoConvertor {
         }
         return "";
     }
-    public static String contextConvertor(Context context) {
+    public static String reviewsConvertor(Reviews reviews) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            String jsonInStrings = mapper.writeValueAsString(context) ;
+            String jsonInStrings = mapper.writeValueAsString(reviews) ;
             return jsonInStrings;
         } catch (JsonGenerationException e) {
             e.printStackTrace();

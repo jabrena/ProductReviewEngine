@@ -11,13 +11,23 @@ import java.util.UUID;
 public class ResponseBuilder {
 
     public static Response statusOkayResponse(Review review) {
-        UUID id = UUID.randomUUID();
         Response response = new Response();
-        response.setCorrelation(id.toString());
+        response.setCorrelation(UUID.randomUUID().toString());
         response.setResponse("POST request successful");
         response.setBody(PojoConvertor.reviewConvertor(review));
         return response;
     }
+
+    public static Response statusReviewsResponse() {
+        Reviews reviews = reviewResponse();
+        UUID id = UUID.randomUUID();
+        Response response = new Response();
+        response.setCorrelation(id.toString());
+        response.setResponse("GET request successful");
+        response.setBody(PojoConvertor.reviewsConvertor(reviews));
+        return response;
+    }
+
     public static Reviews reviewResponse() {
         Reviews reviews = new Reviews();
         List<Review> reviewList = new ArrayList<Review>();

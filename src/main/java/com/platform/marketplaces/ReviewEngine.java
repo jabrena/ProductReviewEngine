@@ -1,19 +1,27 @@
 package com.platform.marketplaces;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.platform.marketplaces.models.Review;
-import com.platform.marketplaces.service.ResponseBuilder;
 import com.platform.marketplaces.models.Response;
 
 public class ReviewEngine {
     public Response reviewHandler(Review review, Context context) {
-        LambdaLogger logger = context.getLogger();
-        StringBuilder result = new StringBuilder("");
-        result.append("context " + context.toString() + " is ");
-        logger.log(result.toString());
-        Response response = ResponseBuilder.statusOkayResponse(review);
-        return response;
+        ReviewEngineHandler reviewEngineHandler = new ReviewEngineHandler();
+        Response response = new Response();
+        if(review.getHttpMethod() != null) {
+            if(review.getHttpMethod().toString().equals(Constants.GET)) {
+                if(review.getProductId() != null) {
+                    if(review.getReviewId() != null) {
+                        return reviewEngineHandler.getReviewByReviewId(review.getReviewId(), response);    // GET Reviews/{ReviewId}
+                    } else {
+                        return reviewEngineHandler.getReviewsByProductId(review.getProductId(),response);  // GET Product/{ProductId}
+                    }
+                }
+            } else if (review.getHttpMethod().toString().equals(Constants.POST)) {
+                return reviewEngineHandler.setReviewForProduct(review, response);           // POST Product/{ProductId}
+            }
+        }
+        return reviewEngineHandler.constructInvalidResponse(response);
     }
 }
 
