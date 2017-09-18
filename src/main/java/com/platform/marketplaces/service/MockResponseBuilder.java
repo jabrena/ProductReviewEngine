@@ -1,9 +1,7 @@
 package com.platform.marketplaces.service;
 
 import com.platform.marketplaces.models.Product;
-import com.platform.marketplaces.models.Response;
 import com.platform.marketplaces.models.Review;
-import com.platform.marketplaces.util.PojoConvertor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class MockResponseBuilder {
         Product reviews = new Product();
         List<Review> reviewList = new ArrayList<Review>();
         reviews.setProductId(Integer.parseInt(productId));
-        reviews.setAverageScore(4.5);
+        reviews.setAverageScore(4.0);
 
         Review review = new Review();
         review.setComment("good");
@@ -47,14 +45,15 @@ public class MockResponseBuilder {
 
     public static Product reviewResponse(String productId, String reviewId) {
         Product reviews = new Product();
-        List<Review> reviewList = new ArrayList<Review>();
         reviews.setProductId(Integer.parseInt(productId));
 
+        List<Review> reviewList = new ArrayList<Review>();
         Review review = new Review();
         review.setComment("Not a good product");
         review.setScore(1);
         review.setReviewId(reviewId);
         reviewList.add(review);
+        reviews.setReview(reviewList);
 
         return reviews;
     }

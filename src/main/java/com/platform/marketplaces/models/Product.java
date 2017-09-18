@@ -1,7 +1,10 @@
 package com.platform.marketplaces.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product {
     private int productId;
     private double averageScore;
