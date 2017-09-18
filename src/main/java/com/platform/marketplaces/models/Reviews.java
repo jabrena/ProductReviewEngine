@@ -1,9 +1,11 @@
 package com.platform.marketplaces.models;
 
+import java.util.List;
+
 public class Reviews {
     private int id;
     private double averageScore;
-    private Review review;
+    private List<Review> review;
 
     public int getId() {
         return id;
@@ -21,11 +23,11 @@ public class Reviews {
         this.averageScore = averageScore;
     }
 
-    public Review getReview() {
+    public List<Review> getReview() {
         return review;
     }
 
-    public void setReview(Review review) {
+    public void setReview(List<Review> review) {
         this.review = review;
     }
 }

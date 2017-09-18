@@ -3,6 +3,7 @@ package com.platform.marketplaces;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.platform.marketplaces.models.Review;
+import com.platform.marketplaces.models.Reviews;
 import com.platform.marketplaces.service.ResponseBuilder;
 import com.platform.marketplaces.models.Response;
 
@@ -16,6 +17,10 @@ public class ReviewEngine {
         LambdaLogger logger = context.getLogger();
         Response response = ResponseBuilder.statusOkayResponse(review);
         return response;
+    }
+    public Reviews reviewsHandler(Context context) {
+        LambdaLogger logger = context.getLogger();
+        return ResponseBuilder.reviewResponse();
     }
 
     @GET
