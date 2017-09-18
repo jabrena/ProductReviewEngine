@@ -9,16 +9,16 @@ public class ReviewEngine {
         ReviewEngineHandler reviewEngineHandler = new ReviewEngineHandler();
         Response response = new Response();
         if(review.getHttpMethod() != null) {
-            if(review.getHttpMethod().toString().equals(Constants.GET)) {
+            if(review.getHttpMethod().equals(Constants.GET)) {
                 if(review.getProductId() != null) {
                     if(review.getReviewId() != null) {
-                        return reviewEngineHandler.getReviewByReviewId(review.getReviewId(), response);    // GET Reviews/{ReviewId}
+                        return reviewEngineHandler.getReviewByReviewId(review.getReviewId(), response);
                     } else {
-                        return reviewEngineHandler.getReviewsByProductId(review.getProductId(),response);  // GET Product/{ProductId}
+                        return reviewEngineHandler.getReviewsByProductId(review.getProductId(),response);
                     }
                 }
-            } else if (review.getHttpMethod().toString().equals(Constants.POST)) {
-                return reviewEngineHandler.setReviewForProduct(review, response);           // POST Product/{ProductId}
+            } else if (review.getHttpMethod().equals(Constants.POST)) {
+                return reviewEngineHandler.setReviewForProduct(review, response);
             }
         }
         return reviewEngineHandler.constructInvalidResponse(response);

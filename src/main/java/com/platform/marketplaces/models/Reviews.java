@@ -3,16 +3,16 @@ package com.platform.marketplaces.models;
 import java.util.List;
 
 public class Reviews {
-    private int id;
+    private int productId;
     private double averageScore;
     private List<Review> review;
 
-    public int getId() {
-        return id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public double getAverageScore() {

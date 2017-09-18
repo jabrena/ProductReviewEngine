@@ -4,44 +4,39 @@ import com.platform.marketplaces.models.Review;
 import com.platform.marketplaces.models.Reviews;
 import com.platform.marketplaces.util.PojoConvertor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class ResponseBuilder {
 
-    public static Response statusOkayResponse(Review review) {
-        Response response = new Response();
+    public static Response statusOkayResponse(Response response, Review review) {
         response.setCorrelation(UUID.randomUUID().toString());
         response.setResponse("POST request successful");
         response.setBody(PojoConvertor.reviewConvertor(review));
         return response;
     }
 
-    public static Response statusReviewsResponse() {
-        Reviews reviews = reviewResponse();
+    public static Response statusReviewsResponse(String reviewId, Response response) {
+        Reviews reviews = MockResponseBuilder.reviewsResponse();
         UUID id = UUID.randomUUID();
-        Response response = new Response();
         response.setCorrelation(id.toString());
         response.setResponse("GET request successful");
         response.setBody(PojoConvertor.reviewsConvertor(reviews));
         return response;
     }
 
-    public static Reviews reviewResponse() {
-        Reviews reviews = new Reviews();
-        List<Review> reviewList = new ArrayList<Review>();
-        reviews.setId(121);
-        reviews.setAverageScore(4.5);
-        Review review = new Review();
-        review.setComment("good");
-        review.setScore(3);
-        Review review1 = new Review();
-        review1.setComment("great");
-        review1.setScore(5);
-        reviewList.add(review);
-        reviewList.add(review1);
-        reviews.setReview(reviewList);
-        return reviews;
+    public static Response statusReviewResponse(String productId, Response response) {
+        Review review = MockResponseBuilder.reviewResponse();
+        UUID id = UUID.randomUUID();
+        response.setCorrelation(id.toString());
+        response.setResponse("GET request successful");
+        response.setBody(PojoConvertor.reviewConvertor(review));
+        return response;
+    }
+
+    public static Response statusInvalidResponse(Response response) {
+        response.setResponse("Invalid Input");
+        response.setBody("Invalid Input/Unsupported HTTP Method");
+        response.setCorrelation(UUID.randomUUID().toString());
+        return response;
     }
 }

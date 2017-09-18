@@ -11,28 +11,21 @@ import java.util.UUID;
 public class ReviewEngineHandler {
 
     // GET Reviews/{ReviewId}
-    public static Response getReviewByReviewId(String reviewId, Response response) {
-        Reviews reviews = ResponseBuilder.reviewResponse();
-        return ResponseBuilder.statusReviewsResponse();
+    public Response getReviewByReviewId(String reviewId, Response response) {
+        return ResponseBuilder.statusReviewsResponse(reviewId, response);
     }
-
     // GET Product/{ProductId}
-    public static Response getReviewsByProductId(String productId, Response response) {
-        Reviews reviews = ResponseBuilder.reviewResponse();
-        return ResponseBuilder.statusReviewsResponse();
+    public Response getReviewsByProductId(String productId, Response response) {
+        return ResponseBuilder.statusReviewsResponse(productId, response);
     }
 
     // POST Product/{ProductId}
-    public static Response setReviewForProduct(Review review, Response response) {
-        response = ResponseBuilder.statusOkayResponse(review);
-        return response;
+    public Response setReviewForProduct(Review review, Response response) {
+        return ResponseBuilder.statusOkayResponse(response, review);
     }
 
-    // POST Product/{ProductId}
-    public static Response constructInvalidResponse(Response response) {
-        response.setResponse("Invalid Input");
-        response.setBody("Invalid Input/Unsupported HTTP Method");
-        response.setCorrelation(UUID.randomUUID().toString());
-        return response;
+    // PUT/PATCH/DELETE Product/{ProductId}
+    public Response constructInvalidResponse(Response response) {
+        return ResponseBuilder.statusInvalidResponse(response);
     }
 }
